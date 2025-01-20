@@ -1,0 +1,18 @@
+## Исключение bloop и metals
+#.bloop/
+#.metals/
+#.idea/
+#*.class
+#*.tasty
+#
+## Исключение артефактов сборки
+#target/
+#out/
+#
+## Лог-файлы
+#*.log
+#
+## SBT файлы
+#.project
+#.cache
+#.history
