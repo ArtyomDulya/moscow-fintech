@@ -1,0 +1,60 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(__runWatch console0, Some(ab98be0f-65a8-4a98-9266-240d2c9657ae), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(sbtStashOnFailure, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(__preWatch console0, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(compile, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / compile[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /home/artyom/Scala/moscow-fintech-project/target/scala-3.3.4/classes ...[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E006] Not Found Error: /home/artyom/Scala/moscow-fintech-project/src/main/scala/fintech/http/routes/GetDataXmlRoutes.scala:10:13 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m10 |[0m        [33mcase[0m GET -> Root / [31m"https://iss.moex.com/iss/engines/stock/markets/index/securities.xml?marketdata.securities=MICEX10INDEX,MICEXINDEXCF"[0m => Ok()[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m   |[0m             ^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m             Not found: GET[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m longer explanation available when compiling with `-explain`[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E189] Not Found Error: /home/artyom/Scala/moscow-fintech-project/src/main/scala/fintech/http/routes/GetDataXmlRoutes.scala:10:25 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m10 |[0m        [33mcase[0m GET -> Root / [31m"https://iss.moex.com/iss/engines/stock/markets/index/securities.xml?marketdata.securities=MICEX10INDEX,MICEXINDEXCF"[0m => Ok()[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m   |[0m                         ^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m                         no pattern match extractor named / was found[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m longer explanation available when compiling with `-explain`[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E006] Not Found Error: /home/artyom/Scala/moscow-fintech-project/src/main/scala/fintech/http/routes/GetDataXmlRoutes.scala:10:20 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m10 |[0m        [33mcase[0m GET -> Root / [31m"https://iss.moex.com/iss/engines/stock/markets/index/securities.xml?marketdata.securities=MICEX10INDEX,MICEXINDEXCF"[0m => Ok()[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m   |[0m                    ^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m                    Not found: Root[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m longer explanation available when compiling with `-explain`[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E006] Not Found Error: /home/artyom/Scala/moscow-fintech-project/src/main/scala/fintech/http/routes/GetDataXmlRoutes.scala:10:148 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m10 |[0m        [33mcase[0m GET -> Root / [31m"https://iss.moex.com/iss/engines/stock/markets/index/securities.xml?marketdata.securities=MICEX10INDEX,MICEXINDEXCF"[0m => Ok()[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m   |[0m                                                                                                                                                    ^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m                                                           Not found: Ok[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m longer explanation available when compiling with `-explain`[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E172] Type Error: /home/artyom/Scala/moscow-fintech-project/src/main/scala/fintech/http/routes/GetDataXmlRoutes.scala:12:5 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m12 |[0m    }[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m   |[0m     ^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0mNo given instance of type cats.Monad[F] was found for a context parameter of [33mmethod[0m [35mof[0m in [33mobject[0m [35mHttpRoutes[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0mOne of the following imports might make progress towards fixing the problem:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m  import fs2.Compiler.Target.forConcurrent[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m  import fs2.Compiler.Target.forSync[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E172] Type Error: /home/artyom/Scala/moscow-fintech-project/src/main/scala/fintech/http/routes/GetDataXmlRoutes.scala:16:5 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m16 |[0m    )[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m   |[0m     ^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0mNo given instance of type cats.Monad[F] was found for a context parameter of [33mmethod[0m [35mapply[0m in [33mobject[0m [35mRouter[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0mOne of the following imports might make progress towards fixing the problem:[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m  import fs2.Compiler.Target.forConcurrent[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m  import fs2.Compiler.Target.forSync[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m6 errors found[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 2 s, completed Jan 11, 2025, 8:12:42 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(resumeFromFailure, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(sbtPopOnFailure, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(__postWatch console0, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(resumeFromFailure, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(__waitWatch console0, None, None)[0m
+[0m[[0m[0minfo[0m] [0m[0mshutting down sbt server[0m

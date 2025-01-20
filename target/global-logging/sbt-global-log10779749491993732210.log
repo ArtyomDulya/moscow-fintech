@@ -1,0 +1,49 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(~compile, Some(455a31e5-1c7d-4c13-8a31-1592f6bb53c9), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(__runWatch console0, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(sbtStashOnFailure, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(__preWatch console0, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(compile, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / compile[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 19 Scala sources to /home/artyom/Scala/moscow-fintech-project/target/scala-2.13/classes ...[0m
+[0m[[0m[31merror[0m] [0m[0m/home/artyom/Scala/moscow-fintech-project/src/main/scala/fintech/config/EmberConfig.scala:4:8: object host is not a member of package com.comcast.ip4s[0m
+[0m[[0m[31merror[0m] [0m[0mdid you mean Host? or perhaps Port?[0m
+[0m[[0m[31merror[0m] [0m[0mimport com.comcast.ip4s.{Host,Port, host, port}[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/artyom/Scala/moscow-fintech-project/src/main/scala/fintech/Application.scala:22:20: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : cats.effect.kernel.Resource[cats.effect.IO,org.http4s.server.Server][0m
+[0m[[0m[31merror[0m] [0m[0m required: cats.effect.kernel.Resource[[+A]cats.effect.Resource[cats.effect.IO,A],?][0m
+[0m[[0m[31merror[0m] [0m[0m    (which expands to)  cats.effect.kernel.Resource[[+A]cats.effect.kernel.Resource[cats.effect.IO,A],?][0m
+[0m[[0m[31merror[0m] [0m[0m            server <- EmberServerBuilder[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/artyom/Scala/moscow-fintech-project/src/main/scala/fintech/Application.scala:21:21: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : cats.effect.kernel.Resource[[+A]cats.effect.Resource[cats.effect.IO,A],Nothing][0m
+[0m[[0m[31merror[0m] [0m[0m    (which expands to)  cats.effect.kernel.Resource[[+A]cats.effect.kernel.Resource[cats.effect.IO,A],Nothing][0m
+[0m[[0m[31merror[0m] [0m[0m required: cats.effect.kernel.Resource[cats.effect.IO,?][0m
+[0m[[0m[31merror[0m] [0m[0m            httpApi <- Resource.eval(HttpApi[IO](services))[0m
+[0m[[0m[31merror[0m] [0m[0m                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/artyom/Scala/moscow-fintech-project/src/main/scala/fintech/config/EmberConfig.scala:3:8: value host is not a member of object com.comcast.ip4s.Literals[0m
+[0m[[0m[31merror[0m] [0m[0mdid you mean port?[0m
+[0m[[0m[31merror[0m] [0m[0mimport com.comcast.ip4s.Literals.host[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/artyom/Scala/moscow-fintech-project/src/main/scala/fintech/config/EmberConfig.scala:7:43: value host is not a member of StringContext[0m
+[0m[[0m[31merror[0m] [0m[0mfinal case class EmberConfig(host: Host = host"0.0.0.0", port: Port = port"4041")[0m
+[0m[[0m[31merror[0m] [0m[0m                                          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/artyom/Scala/moscow-fintech-project/src/main/scala/fintech/config/EmberConfig.scala:7:71: value port is not a member of StringContext[0m
+[0m[[0m[31merror[0m] [0m[0mdid you mean parts?[0m
+[0m[[0m[31merror[0m] [0m[0mfinal case class EmberConfig(host: Host = host"0.0.0.0", port: Port = port"4041")[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                      ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/artyom/Scala/moscow-fintech-project/src/main/scala/fintech/modules/HttpApi.scala:22:5: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : Unit[0m
+[0m[[0m[31merror[0m] [0m[0m required: cats.effect.Resource[F,fintech.modules.HttpApi[F]][0m
+[0m[[0m[31merror[0m] [0m[0m    (which expands to)  cats.effect.kernel.Resource[F,fintech.modules.HttpApi[F]][0m
+[0m[[0m[31merror[0m] [0m[0m    }[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m7 errors found[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 4 s, completed Jan 11, 2025, 4:28:13 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(resumeFromFailure, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(sbtPopOnFailure, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(__postWatch console0, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(__waitWatch console0, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0minfo[0m] [0m[0mshutting down sbt server[0m

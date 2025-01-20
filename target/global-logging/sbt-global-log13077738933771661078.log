@@ -1,0 +1,29 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(~compile, Some(ca5af9f0-c8cd-4e31-a50a-9de978dac623), Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(__runWatch console0, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(sbtStashOnFailure, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(__preWatch console0, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(compile, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / compile[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 19 Scala sources to /home/artyom/Scala/moscow-fintech-project/target/scala-3.3.4/classes ...[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m-- [E007] Type Mismatch Error: /home/artyom/Scala/moscow-fintech-project/src/main/scala/fintech/Application.scala:22:12 [0m[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m22 |[0m            server <- EmberServerBuilder[0m
+[0m[[0m[31merror[0m] [0m[0m[31m[31m   |[0m            ^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0mFound:    cats.effect.kernel.Resource[cats.effect.[1m[31mIO[0m[1m[31m,[0m[1m[31m [0m[1m[31morg[0m.[1m[31mhttp4s[0m.[1m[31mserver[0m[1m[31m.[0m[1m[31mServer[0m][0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0mRequired: cats.effect.kernel.Resource[[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[1m[32m [0m[1m[32m [0m[1m[32m[[0m[1m[32mA[0m[1m[32m][0m[1m[32m [0m[1m[32m=[0m[1m[32m>[0m[1m[32m>[0m[1m[32m [0mcats.effect.[1m[32mkernel[0m[1m[32m.[0m[1m[32mResource[0m[1m[32m[[0m[1m[32mcats[0m.[1m[32meffect[0m.[1m[32mIO[0m[1m[32m,[0m[1m[32m [0m[1m[32mA[0m[1m[32m][0m[1m[32m,[0m[1m[32m [0m[1m[32mAny[0m][0m
+[0m[[0m[31merror[0m] [0m[0m[31m23 |[0m                .default[IO][0m
+[0m[[0m[31merror[0m] [0m[0m[31m24 |[0m                .withHost(emberConfig.host)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m25 |[0m                .withPort(emberConfig.port)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m26 |[0m                .withHttpApp(httpApi.endpoints.orNotFound)[0m
+[0m[[0m[31merror[0m] [0m[0m[31m27 |[0m                .build[0m
+[0m[[0m[31merror[0m] [0m[0m[31m28 |[0m        } [33myield[0m server[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m   |[0m longer explanation available when compiling with `-explain`[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mcompileIncremental[0m) Compilation failed[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 8 s, completed Jan 11, 2025, 5:00:47 PM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(resumeFromFailure, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(sbtPopOnFailure, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(__postWatch console0, None, Some(CommandSource(console0)))[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(__waitWatch console0, None, Some(CommandSource(console0)))[0m

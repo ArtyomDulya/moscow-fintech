@@ -1,0 +1,16 @@
+
+ç'src/main/scala/foundations/Doobie.scala2
+ cats/2
+ cats/effect/2
+ cats/effect/IO.2
+ cats/effect/IO#2
+ doobie/2
+ doobie/hikari/2-
+ %doobie/hikari/HikariTransactor.2
+ doobie/2
+ doobie/util/2,
+ $doobie/util/ExecutionContexts.:ñ
+ $æNo class, trait or object is defined in the compilation unit.
+The incremental compiler cannot record the dependency information in such case.
+Some errors like unused import referring to a non-existent class might not be reported.
+PZ 2785A8BA785E41E23ED3A0347AD3665A
