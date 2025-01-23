@@ -6,7 +6,7 @@ import fintech.domain.history.History
 
 class HistoriesService private (histories: Histories, xmlService: XmlService) {
 
-    def importAllHistories(data: String): IO[List[History]] = {
+    def importHistories(data: String): IO[List[History]] = {
         val liveHistory = xmlService.parseXmlHistories(data)
         histories.importHistories(liveHistory)
     }

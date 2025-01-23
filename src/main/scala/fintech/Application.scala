@@ -7,7 +7,6 @@ import fintech.http.routes.{HistoriesRoutes, SecuritiesRouters}
 import fintech.modules.{Core, DataBase, HttpApi, Service}
 import fintech.services.{HistoriesService, SecuritiesService, XmlService}
 import cats.implicits._
-import fintech.domain.security.SecurityInfo
 import org.http4s.client.Client
 import org.http4s.ember.client.EmberClientBuilder
 import org.http4s.ember.server.EmberServerBuilder

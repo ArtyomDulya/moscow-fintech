@@ -1,7 +1,7 @@
 package fintech.services
 
 import fintech.domain.history.History
-import fintech.domain.security.{Security, SecurityInfo}
+import fintech.domain.security.Security
 
 import java.sql.Date
 import java.text.SimpleDateFormat
@@ -20,7 +20,7 @@ class XmlService private {
             val name         = (row \ "@name").text
             val emitentTitle = (row \ "@emitent_title").headOption.map(_.text).filter(_.nonEmpty)
 
-            Security(id.toLong, SecurityInfo(secId, regNumber, name, emitentTitle))
+            Security(id.toLong, secId, regNumber, name, emitentTitle)
         }
     }.toList
 

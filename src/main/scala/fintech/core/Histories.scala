@@ -51,6 +51,9 @@ class LiveHistories private (xa: Transactor[IO]) extends Histories {
             }
             .transact(xa)
             .map(_.collect { case Some(history) => history })
+            .handleErrorWith { error =>
+                IO.println(s"Database error: ${error.getMessage}") *> IO.raiseError(error)
+            }
     }
 
     override def getAllHistories(): IO[List[History]] = {
@@ -58,6 +61,9 @@ class LiveHistories private (xa: Transactor[IO]) extends Histories {
             .query[History]
             .to[List]
             .transact(xa)
+            .handleErrorWith { error =>
+                IO.println(s"Database error: ${error.getMessage}") *> IO.raiseError(error)
+            }
     }
 
     override def deleteHistory(secid: String): IO[History] = {

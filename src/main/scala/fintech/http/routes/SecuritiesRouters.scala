@@ -11,22 +11,23 @@ import org.http4s.HttpRoutes
 import org.http4s.server.Router
 import org.http4s.dsl.io._
 import cats.effect.IO
-import cats.effect.IO.{IOCont, Uncancelable}
-import fintech.domain.security.{Security, SecurityInfo}
+import fintech.domain.security.Security
 import fintech.http.responses.FailureResponse
 import fintech.services.SecuritiesService
 
 class SecuritiesRouters(client: Client[IO], securitiesService: SecuritiesService) {
 
-    val url = uri"https://iss.moex.com/iss/securities.xml"
+    val url = uri"https://iss.moex.com/iss/securities.xml?date=2024-01-01"
+
+    object LimitQueryParamMatcher extends OptionalQueryParamDecoderMatcher[Int]("limit")
 
     private val createSecurityRoute: HttpRoutes[IO] = {
         import org.http4s.circe.CirceEntityCodec._
         HttpRoutes.of[IO] { case req @ POST -> Root / "create" =>
             {
                 for {
-                    securityInfo <- req.as[SecurityInfo]
-                    result       <- securitiesService.createSecurity(securityInfo)
+                    security <- req.as[Security]
+                    result       <- securitiesService.create(security)
                     response     <- Ok(s"Security created with ID: $result")
                 } yield response
             }.handleErrorWith { error =>
@@ -40,7 +41,7 @@ class SecuritiesRouters(client: Client[IO], securitiesService: SecuritiesService
         import org.http4s.circe.CirceEntityCodec._
         HttpRoutes.of[IO] { case GET -> Root / "find" / secId =>
             securitiesService
-                .findSecurity(secId)
+                .find(secId)
                 .flatMap {
                     case Some(security) => Ok(security)
                     case None           => NotFound(FailureResponse(s"Job $secId not found"))
@@ -56,12 +57,12 @@ class SecuritiesRouters(client: Client[IO], securitiesService: SecuritiesService
         HttpRoutes.of[IO] { case req @ POST -> Root / "update" / secId =>
             req.as[Security].flatMap { security =>
                 securitiesService
-                    .findSecurity(secId)
+                    .find(secId)
                     .flatMap {
                         case None => NotFound(FailureResponse(s"Job $secId not found"))
                         case Some(_) =>
                             securitiesService
-                                .updateSecurity(secId, security) *> Ok(
+                                .update(secId, security) *> Ok(
                                 "Changes applied successfully"
                             )
                     }
@@ -76,11 +77,11 @@ class SecuritiesRouters(client: Client[IO], securitiesService: SecuritiesService
         import org.http4s.circe.CirceEntityCodec._
         HttpRoutes.of[IO] { case DELETE -> Root / "delete" / secId =>
             securitiesService
-                .findSecurity(secId)
+                .find(secId)
                 .flatMap {
                     case None => NotFound(FailureResponse(s"Security with secid: $secId not found"))
                     case Some(_) =>
-                        securitiesService.deleteSecurity(secId) *> Ok(
+                        securitiesService.delete(secId) *> Ok(
                             "Security deleted successfully"
                         )
                 }
@@ -92,21 +93,38 @@ class SecuritiesRouters(client: Client[IO], securitiesService: SecuritiesService
 
     private val securitiesGetAllRoute: HttpRoutes[IO] = {
         import org.http4s.circe.CirceEntityCodec._
-        HttpRoutes.of[IO] {
-            case GET -> Root / "getall" =>
-              securitiesService.getAllSecurities().flatMap { securities =>
-                  Ok(securities)
-              }
+        HttpRoutes.of[IO] { case GET -> Root / "getall" =>
+            securitiesService.getAllSecurities().flatMap { securities =>
+                Ok(securities)
+            }
         }
     }
 
     private val importSecuritiesGetAllRoute: HttpRoutes[IO] = HttpRoutes.of[IO] {
-        case GET -> Root / "import" =>
-            client
-                .expect[String](url)
-                .flatMap { data =>
+
+        case GET -> Root / "import" :? LimitQueryParamMatcher(maybeLimit) =>
+            val limit = maybeLimit.getOrElse(0)
+            LazyList
+                .iterate(0)(_ + 100)
+                .takeWhile(_ < limit)
+                .toList
+                .traverse { start =>
+                    val newUrl = url.withQueryParams(Map("start" -> start.toString))
+                client
+                    .expect[String](newUrl)
+                    .flatMap { data =>
+                        securitiesService.importSecurities(data)
+                    }
+                    .attempt
+                }
+                .flatMap { results =>
+                    val (failures, _) = results.partitionMap(identity)
+                if (failures.nonEmpty)
+                    InternalServerError(
+                        s"Some requests failed: ${failures.map(_.getMessage).mkString(", ")}"
+                    )
+                else
                     for {
-                        _              <- securitiesService.importAllSecurities(data)
                         securitiesList <- securitiesService.getAllSecurities()
                         response       <- Ok(securitiesList.asJson)
                     } yield response

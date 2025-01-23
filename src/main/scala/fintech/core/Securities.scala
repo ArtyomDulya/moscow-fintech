@@ -5,12 +5,12 @@ import cats.free.Free
 import doobie.implicits.toSqlInterpolator
 import doobie.implicits._
 import doobie.util.transactor.Transactor
-import fintech.domain.security.{Security, SecurityInfo}
+import fintech.domain.security.Security
 import cats.implicits._
 
 
 trait Securities {
-    def create(securityInfo: SecurityInfo): IO[Int]
+    def create(security: Security): IO[Int]
     def importSecurities(list: List[Security]): IO[Int]
     def getAllSecurities(): IO[List[Security]]
     def find(secId: String): IO[Option[Security]]
@@ -21,14 +21,22 @@ trait Securities {
 
 class LiveSecurities private (xa: Transactor[IO]) extends Securities {
 
-    override def create(securityInfo: SecurityInfo): IO[Int] = {
+    override def create(security: Security): IO[Int] = {
         sql"""
-              INSERT INTO securities(secid, regnumber, name, emitenttitle)
-              VALUES (${securityInfo.secId}, ${securityInfo.regNumber}, ${securityInfo.name}, ${securityInfo.emitentTitle})
+              INSERT INTO securities(id, secid, regnumber, name, emitenttitle)
+              VALUES (
+              ${security.id},
+              ${security.secId},
+              ${security.regNumber},
+              ${security.name},
+              ${security.emitentTitle})
              """
             .update
             .withUniqueGeneratedKeys[Int]("id")
             .transact(xa)
+            .handleErrorWith { error =>
+                IO.println(s"Database error: ${error.getMessage}") *> IO.raiseError(error)
+            }
     }
 
     override def find(secId: String): IO[Option[Security]] = {
@@ -40,21 +48,27 @@ class LiveSecurities private (xa: Transactor[IO]) extends Securities {
             .query[Security]
             .option
             .transact(xa)
+            .handleErrorWith { error =>
+                IO.println(s"Database error: ${error.getMessage}") *> IO.raiseError(error)
+            }
     }
 
     override def update(secId: String, security: Security): IO[Option[Security]] = {
         sql"""
               UPDATE securities
               SET
-              regnumber = ${security.securityInfo.regNumber},
-              name = ${security.securityInfo.name},
-              emitenttitle = ${security.securityInfo.emitentTitle}
+              regnumber = ${security.regNumber},
+              name = ${security.name},
+              emitenttitle = ${security.emitentTitle}
               WHERE secid = $secId
              """
             .update
             .run
             .transact(xa)
             .flatMap(_ => find(secId))
+            .handleErrorWith { error =>
+                IO.println(s"Database error: ${error.getMessage}") *> IO.raiseError(error)
+            }
     }
 
     override def delete(secId: String): IO[Int] = {
@@ -64,12 +78,15 @@ class LiveSecurities private (xa: Transactor[IO]) extends Securities {
             .update
             .run
             .transact(xa)
+            .handleErrorWith { error =>
+                IO.println(s"Database error: ${error.getMessage}") *> IO.raiseError(error)
+            }
     }
 
     override def importSecurities(security: List[Security]): IO[Int] = {
         security
             .traverse { security =>
-               sql"SELECT COUNT(*) FROM securities WHERE secid = ${security.securityInfo.secId}"
+               sql"SELECT COUNT(*) FROM securities WHERE secid = ${security.secId}"
                    .query[Int]
                    .unique
                    .flatMap {
@@ -83,10 +100,10 @@ class LiveSecurities private (xa: Transactor[IO]) extends Securities {
                             emitenttitle
                             ) VALUES (
                             ${security.id},
-                            ${security.securityInfo.secId},
-                            ${security.securityInfo.regNumber},
-                            ${security.securityInfo.name},
-                            ${security.securityInfo.emitentTitle}
+                            ${security.secId},
+                            ${security.regNumber},
+                            ${security.name},
+                            ${security.emitentTitle}
                             )
                             """.update.run
                        case _ => Free.pure(0)
@@ -94,6 +111,9 @@ class LiveSecurities private (xa: Transactor[IO]) extends Securities {
             }
             .transact(xa)
             .map(_.sum)
+            .handleErrorWith { error =>
+                IO.println(s"Database error: ${error.getMessage}") *> IO.raiseError(error)
+            }
     }
 
     override def getAllSecurities(): IO[List[Security]] = {
@@ -101,6 +121,9 @@ class LiveSecurities private (xa: Transactor[IO]) extends Securities {
             .query[Security]
             .to[List]
             .transact(xa)
+            .handleErrorWith { error =>
+                IO.println(s"Database error: ${error.getMessage}") *> IO.raiseError(error)
+            }
     }
 
 }

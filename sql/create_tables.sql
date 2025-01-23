@@ -17,6 +17,23 @@ CREATE TABLE histories(
 
 CREATE UNIQUE INDEX  idx_sec_id_trade_date ON histories (secid, tradedate);
 
+DROP TABLE securities;
+
+DROP TABLE histories;
+
+SELECT
+    s.id,
+    s.secid,
+    s.regnumber,
+    s.name,
+    s.emitenttitle,
+    h.tradedate,
+    h.open,
+    h.close
+FROM securities s
+         LEFT JOIN histories h
+                   ON s.secid = h.secid
+
 
 
 

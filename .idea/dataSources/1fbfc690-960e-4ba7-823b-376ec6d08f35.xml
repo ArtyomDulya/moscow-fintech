@@ -3,9 +3,9 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.53">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <IntrospectionStateNumber>1187</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1254</IntrospectionStateNumber>
       <ServerVersion>17.2</ServerVersion>
-      <StartupTime>1737347759</StartupTime>
+      <StartupTime>1737644793</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -1399,7 +1399,7 @@ false posixrules
 13219||10|C|G
 13219||-9223372036854775808|U|G
 13219||10|U|G</Grants>
-      <IntrospectionStateNumber>1187</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1254</IntrospectionStateNumber>
       <ObjectId>16388</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4830,71 +4830,71 @@ false posixrules
     <schema id="266" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>1187</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2025-01-20.09:57:10</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>1254</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2025-01-23.16:44:37</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>532</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
     </schema>
     <sequence id="267" parent="266" name="securities_id_seq">
-      <ObjectId>24801</ObjectId>
+      <ObjectId>24888</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>1098</StateNumber>
+      <StateNumber>1228</StateNumber>
       <StoredType>bigint|0s</StoredType>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <table id="268" parent="266" name="histories">
-      <ObjectId>24879</ObjectId>
-      <StateNumber>1155</StateNumber>
+      <ObjectId>24899</ObjectId>
+      <StateNumber>1230</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
     <table id="269" parent="266" name="securities">
-      <ObjectId>24802</ObjectId>
-      <StateNumber>1100</StateNumber>
+      <ObjectId>24889</ObjectId>
+      <StateNumber>1230</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
     <column id="270" parent="268" name="secid">
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>1155</StateNumber>
+      <StateNumber>1230</StateNumber>
       <StoredType>varchar(36)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="271" parent="268" name="tradedate">
       <Position>2</Position>
-      <StateNumber>1155</StateNumber>
+      <StateNumber>1230</StateNumber>
       <StoredType>date|0s</StoredType>
       <TypeId>1082</TypeId>
     </column>
     <column id="272" parent="268" name="open">
       <Position>3</Position>
-      <StateNumber>1155</StateNumber>
+      <StateNumber>1230</StateNumber>
       <StoredType>double precision|0s</StoredType>
       <TypeId>701</TypeId>
     </column>
     <column id="273" parent="268" name="close">
       <Position>4</Position>
-      <StateNumber>1155</StateNumber>
+      <StateNumber>1230</StateNumber>
       <StoredType>double precision|0s</StoredType>
       <TypeId>701</TypeId>
     </column>
     <foreign-key id="274" parent="268" name="histories_secid_fkey">
       <ColNames>secid</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24882</ObjectId>
+      <ObjectId>24902</ObjectId>
       <OnDelete>cascade</OnDelete>
-      <StateNumber>1155</StateNumber>
+      <StateNumber>1230</StateNumber>
       <RefKeyColPositions>2</RefKeyColPositions>
-      <RefTableId>24802</RefTableId>
+      <RefTableId>24889</RefTableId>
     </foreign-key>
     <index id="275" parent="268" name="idx_sec_id_trade_date">
       <ColNames>secid
 tradedate</ColNames>
-      <ObjectId>24887</ObjectId>
-      <StateNumber>1157</StateNumber>
+      <ObjectId>24907</ObjectId>
+      <StateNumber>1253</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
@@ -4905,51 +4905,51 @@ tradedate</ColNames>
       <DefaultExpression>nextval(&apos;securities_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>1098</StateNumber>
+      <StateNumber>1228</StateNumber>
       <StoredType>bigint|0s</StoredType>
-      <SequenceId>24801</SequenceId>
+      <SequenceId>24888</SequenceId>
       <TypeId>20</TypeId>
     </column>
     <column id="277" parent="269" name="secid">
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>1098</StateNumber>
+      <StateNumber>1228</StateNumber>
       <StoredType>varchar(36)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="278" parent="269" name="regnumber">
       <Position>3</Position>
-      <StateNumber>1098</StateNumber>
+      <StateNumber>1228</StateNumber>
       <StoredType>varchar(189)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="279" parent="269" name="name">
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StateNumber>1098</StateNumber>
+      <StateNumber>1228</StateNumber>
       <StoredType>varchar(765)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <column id="280" parent="269" name="emitenttitle">
       <Position>5</Position>
-      <StateNumber>1098</StateNumber>
+      <StateNumber>1228</StateNumber>
       <StoredType>varchar(765)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
     <index id="281" parent="269" name="securities_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24808</ObjectId>
+      <ObjectId>24895</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>1098</StateNumber>
+      <StateNumber>1228</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
     <index id="282" parent="269" name="securities_secid_key">
       <ColNames>secid</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24810</ObjectId>
-      <StateNumber>1098</StateNumber>
+      <ObjectId>24897</ObjectId>
+      <StateNumber>1228</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
@@ -4958,16 +4958,16 @@ tradedate</ColNames>
     </index>
     <key id="283" parent="269" name="securities_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24809</ObjectId>
+      <ObjectId>24896</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>1098</StateNumber>
-      <UnderlyingIndexId>24808</UnderlyingIndexId>
+      <StateNumber>1228</StateNumber>
+      <UnderlyingIndexId>24895</UnderlyingIndexId>
     </key>
     <key id="284" parent="269" name="securities_secid_key">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>24811</ObjectId>
-      <StateNumber>1098</StateNumber>
-      <UnderlyingIndexId>24810</UnderlyingIndexId>
+      <ObjectId>24898</ObjectId>
+      <StateNumber>1228</StateNumber>
+      <UnderlyingIndexId>24897</UnderlyingIndexId>
     </key>
   </database-model>
 </dataSource>

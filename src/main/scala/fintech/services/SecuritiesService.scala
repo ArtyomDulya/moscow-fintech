@@ -2,27 +2,27 @@ package fintech.services
 
 import cats.effect.IO
 import fintech.core.{LiveSecurities, Securities}
-import fintech.domain.security.{Security, SecurityInfo}
+import fintech.domain.security.Security
 
 class SecuritiesService private (securities: Securities, xmlService: XmlService) {
 
-    def createSecurity(securityInfo: SecurityInfo): IO[Int] = {
-        securities.create(securityInfo)
+    def create(security: Security): IO[Int] = {
+        securities.create(security)
     }
 
-    def findSecurity(secId: String): IO[Option[Security]] = {
+    def find(secId: String): IO[Option[Security]] = {
         securities.find(secId)
     }
 
-    def updateSecurity(secId: String, security: Security): IO[Option[Security]] = {
+    def update(secId: String, security: Security): IO[Option[Security]] = {
         securities.update(secId, security)
     }
 
-    def deleteSecurity(secId: String): IO[Int] = {
+    def delete(secId: String): IO[Int] = {
         securities.delete(secId)
     }
 
-    def importAllSecurities(data: String): IO[Int] = {
+    def importSecurities(data: String): IO[Int] = {
         val listSecurity = xmlService.parseXmlSecurities(data)
         securities.importSecurities(listSecurity)
 
