@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "cd651275-9592-4f3f-9d73-1e4e6c9edae7",
+		"name": "[moscow-fintech on scala 2] /api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22917516"
+	},
+	"item": [
+		{
+			"name": "seciritiesRoutes",
+			"item": [
+				{
+					"name": "importAndGetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4041/api/v1/securities/import?limit=1000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4041",
+							"path": [
+								"api",
+								"v1",
+								"securities",
+								"import"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "1000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4041/api/v1/securities/getall",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4041",
+							"path": [
+								"api",
+								"v1",
+								"securities",
+								"getall"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"secid\": \"9\",\r\n    \"regnumber\": null,\r\n    \"name\": \"Расчетная цена одного пая интервального ПИФа «2х Акции» УК ВИМ\",\r\n    \"emitenttitle\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4041/api/v1/securities/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4041",
+							"path": [
+								"api",
+								"v1",
+								"securities",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4041/api/v1/securities/find/RUEU10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4041",
+							"path": [
+								"api",
+								"v1",
+								"securities",
+								"find",
+								"RUEU10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\":  6,\r\n        \"securityInfo\": {\r\n            \"secid\": \"5xE\",\r\n            \"regnumber\": null,\r\n            \"name\": \"Это теперь АБСОЛЮНО НОВЫЙ ОБЪЕКТ СУУПЕРР!\",\r\n            \"emitenttitle\": null\r\n        }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4041/api/v1/securities/update/55100xE108100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4041",
+							"path": [
+								"api",
+								"v1",
+								"securities",
+								"update",
+								"55100xE108100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4041/api/v1/securities/delete/55100xE108100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4041",
+							"path": [
+								"api",
+								"v1",
+								"securities",
+								"delete",
+								"55100xE108100"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "historiesRoutes",
+			"item": [
+				{
+					"name": "importAndGetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4041/api/v1/histories/import?date=2020-01-01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4041",
+							"path": [
+								"api",
+								"v1",
+								"histories",
+								"import"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2020-01-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4041/api/v1/histories/getall",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4041",
+							"path": [
+								"api",
+								"v1",
+								"histories",
+								"getall"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SecuritiesHistoriesRoutes",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4041/api/v1/summary/getall",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4041",
+							"path": [
+								"api",
+								"v1",
+								"summary",
+								"getall"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
