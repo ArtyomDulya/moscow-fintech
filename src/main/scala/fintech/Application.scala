@@ -1,5 +1,6 @@
 package fintech
 
+import cats.Applicative
 import cats.effect.{Async, ExitCode, IO, IOApp, Resource}
 import fintech.config.{EmberConfig, PostgresConfig}
 import fintech.core.{LiveHistories, LiveSecurities}
@@ -11,6 +12,7 @@ import org.http4s.client.Client
 import org.http4s.ember.client.EmberClientBuilder
 import org.http4s.ember.server.EmberServerBuilder
 import org.http4s.server.Server
+import org.http4s.server.middleware.CORS
 import org.typelevel.log4cats.{Logger, LoggerFactory}
 import org.typelevel.log4cats.slf4j.{Slf4jFactory, Slf4jLogger}
 
@@ -30,11 +32,18 @@ object Application extends IOApp.Simple {
             core    = Core(xa)
             service = Service(core)
             httpApi = HttpApi(client, service)
+            corsHttp <- Resource.liftK(
+                CORS.policy.withAllowOriginAll
+                    .withAllowCredentials(false)
+                    .withAllowMethodsAll
+                    .withAllowHeadersAll
+                    .apply(httpApi.endpoints.orNotFound)
+            )
             server <- EmberServerBuilder
                 .default[IO]
                 .withHost(emberConfig.host)
                 .withPort(emberConfig.port)
-                .withHttpApp(httpApi.endpoints.orNotFound)
+                .withHttpApp(corsHttp)
                 .build
         } yield server
     }

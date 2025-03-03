@@ -35,7 +35,7 @@ object CustomEncoderDecoder {
             }
     }
 
-    implicit val emcodeHistory: Encoder[History] = new Encoder[History] {
+    implicit val encodeHistory: Encoder[History] = new Encoder[History] {
         override def apply(a: History): Json = Json.obj(
             ("secid", a.secId.asJson),
             ("tradedate", a.tradeDate.asJson),
@@ -56,7 +56,7 @@ object CustomEncoderDecoder {
             }
     }
 
-    implicit val emcodeSecurityHistory: Encoder[SecurityHistory] = new Encoder[SecurityHistory] {
+    implicit val encodeSecurityHistory: Encoder[SecurityHistory] = new Encoder[SecurityHistory] {
         override def apply(a: SecurityHistory): Json = Json.obj(
             ("id", a.id.asJson),
             ("secid", a.secId.asJson),

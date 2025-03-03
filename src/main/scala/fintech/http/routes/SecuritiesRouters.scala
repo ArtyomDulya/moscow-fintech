@@ -17,9 +17,8 @@ import fintech.services.SecuritiesService
 
 class SecuritiesRouters(client: Client[IO], securitiesService: SecuritiesService) {
 
-    val url = uri"https://iss.moex.com/iss/securities.xml?date=2024-01-01"
-
     object LimitQueryParamMatcher extends OptionalQueryParamDecoderMatcher[Int]("limit")
+    object DateQueryParamMatcher extends QueryParamDecoderMatcher[String]("date")
 
     private val createSecurityRoute: HttpRoutes[IO] = {
         import org.http4s.circe.CirceEntityCodec._
@@ -102,14 +101,16 @@ class SecuritiesRouters(client: Client[IO], securitiesService: SecuritiesService
 
     private val importSecuritiesGetAllRoute: HttpRoutes[IO] = HttpRoutes.of[IO] {
 
-        case GET -> Root / "import" :? LimitQueryParamMatcher(maybeLimit) =>
+        case GET -> Root / "import" :? DateQueryParamMatcher(date) +& LimitQueryParamMatcher(maybeLimit) =>
             val limit = maybeLimit.getOrElse(0)
+
+            val url = uri"https://iss.moex.com/iss/securities.xml"
             LazyList
                 .iterate(0)(_ + 100)
                 .takeWhile(_ < limit)
                 .toList
                 .traverse { start =>
-                    val newUrl = url.withQueryParams(Map("start" -> start.toString))
+                    val newUrl = url.withQueryParams(Map("date" -> date, "start" -> start.toString))
                 client
                     .expect[String](newUrl)
                     .flatMap { data =>
